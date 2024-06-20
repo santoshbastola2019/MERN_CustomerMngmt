@@ -1,6 +1,6 @@
 import React from "react";
 
-const nomatch = () => {
+const Nomatch = () => {
   return (
     <div>
       <h1>No Match Component</h1>
@@ -8,4 +8,4 @@ const nomatch = () => {
   );
 };
 
-export default nomatch;
+export default Nomatch;

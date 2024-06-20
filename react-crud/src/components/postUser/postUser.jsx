@@ -1,6 +1,6 @@
 import React from "react";
 
-const postUser = () => {
+const PostUser = () => {
   return (
     <div>
       <h1>PostUser Component</h1>
@@ -8,4 +8,4 @@ const postUser = () => {
   );
 };
 
-export default postUser;
+export default PostUser;
