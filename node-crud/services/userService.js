@@ -17,6 +17,10 @@ class UserServices {
   async updateUser(userId, updateData) {
     return await User.findByIdAndUpdate(userId, updateData);
   }
+
+  async deleteUser(userId) {
+    return await User.findByIdAndDelete(userId);
+  }
 }
 
 module.exports = new UserServices();

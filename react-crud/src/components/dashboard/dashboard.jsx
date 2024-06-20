@@ -5,25 +5,41 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/user");
-        const result = await response.json();
-        if (Array.isArray(result)) {
-          setUsers(result);
-        } else if (result.users) {
-          setUsers(result.users);
-        }
-      } catch (error) {
-        console.error("Error while fetching users", error.message);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/user");
+      const result = await response.json();
+      if (Array.isArray(result)) {
+        setUsers(result);
+      } else if (result.users) {
+        setUsers(result.users);
       }
-    };
+    } catch (error) {
+      console.error("Error while fetching users", error.message);
+    }
+  };
+
+  useEffect(() => {
     fetchUsers();
   }, []);
 
   const handleUpdate = (userId) => {
     navigate(`/user/${userId}`);
+  };
+
+  const handleDelete = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/user/${userId}`, {
+        method: "Delete",
+      });
+      console.log(response);
+      if (response.ok) {
+        fetchUsers();
+      }
+    } catch (error) {
+      console.error("Error while deleting users", error.message);
+    }
   };
 
   return (
@@ -53,12 +69,12 @@ const Dashboard = () => {
                     >
                       Update
                     </Button>{" "}
-                    {/* <Button
+                    <Button
                       variant="danger"
                       onClick={() => handleDelete(user._id)}
                     >
                       Delete
-                    </Button> */}
+                    </Button>
                   </td>
                 </tr>
               ))}
